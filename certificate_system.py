@@ -245,7 +245,7 @@ class CertificateSystem:
         pdf.rect(box_x, box_y, box_w, box_h)
         
         # Content inside box - precisely positioned
-        pdf.set_x(box_x + 8)
+        pdf.set_x(box_x + 15)
         pdf.set_y(box_y + 8)
         
         pdf.set_font("Arial", size=10)
@@ -365,7 +365,7 @@ class CertificateSystem:
         pdf.rect(box_x, box_y, box_w, box_h)
         
         # Content inside box - precisely positioned
-        pdf.set_x(box_x + 8)
+        pdf.set_x(box_x + 15)
         pdf.set_y(box_y + 8)
         
         pdf.set_font("Times", size=10)
@@ -499,7 +499,7 @@ class CertificateSystem:
         pdf.rect(card_x, card_y, card_w, card_h, 'FD')
         
         # Card content - precisely positioned
-        pdf.set_x(card_x + 8)
+        pdf.set_x(card_x + 15)
         pdf.set_y(card_y + 10)
         
         pdf.set_font("Arial", style='B', size=11)
@@ -611,7 +611,7 @@ class CertificateSystem:
         pdf.rect(info_x, info_y, info_w, info_h)
         
         # Content inside info box - precisely positioned
-        pdf.set_x(info_x + 8)
+        pdf.set_x(info_x + 15)
         pdf.set_y(info_y + 8)
         
         pdf.set_font("Arial", size=9)
