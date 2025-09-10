@@ -1,0 +1,16 @@
+2025-09-10 12:35:03,259 - INFO - Created example: examples/example_default.pdf
+2025-09-10 12:35:03,259 - INFO - Created example: examples/example_academic.pdf
+2025-09-10 12:35:03,259 - INFO - Created example: examples/example_modern.pdf
+2025-09-10 12:35:03,259 - INFO - Created example: examples/example_minimal.pdf
+2025-09-10 12:35:05,335 - INFO - Loaded 5 rows from participants.xlsx
+2025-09-10 12:35:05,335 - INFO - Processed 5 valid participants
+2025-09-10 12:35:05,336 - INFO - Generated certificate for John Smith
+2025-09-10 12:35:05,337 - INFO - Generated certificate for Jane Johnson
+2025-09-10 12:35:05,337 - INFO - Generated certificate for Michael Williams
+2025-09-10 12:35:05,338 - INFO - Generated certificate for Sarah Brown
+2025-09-10 12:35:05,338 - INFO - Generated certificate for David Davis
+2025-09-10 12:35:05,338 - INFO - Generated 5/5 certificates
+2025-09-10 12:35:27,625 - INFO - Created example: examples/example_default.pdf
+2025-09-10 12:35:27,625 - INFO - Created example: examples/example_academic.pdf
+2025-09-10 12:35:27,626 - INFO - Created example: examples/example_modern.pdf
+2025-09-10 12:35:27,626 - INFO - Created example: examples/example_minimal.pdf
