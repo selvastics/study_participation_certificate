@@ -234,11 +234,11 @@ class CertificateSystem:
             pdf.cell(200, 8, txt=f'"{study_title}"', ln=True, align='C')
         
         # Details box - perfectly aligned with proper spacing
-        pdf.ln(20)
+        pdf.ln(15)
         box_x = 25
         box_y = pdf.get_y()
         box_w = 160
-        box_h = 55
+        box_h = 45
         
         # Draw box
         pdf.set_draw_color(0, 0, 0)
@@ -279,7 +279,7 @@ class CertificateSystem:
             pdf.cell(box_w - 16, line_height, txt=org_text, ln=True)
         
         # Signature area - perfectly aligned
-        pdf.ln(25)
+        pdf.ln(15)
         pdf.set_font("Arial", size=10)
         
         # Left signature area
@@ -290,9 +290,10 @@ class CertificateSystem:
         pdf.set_x(115)
         pdf.cell(70, 8, txt="Date:", ln=True)
         
-        # Signature lines - precisely positioned
-        pdf.line(25, pdf.get_y() + 3, 95, pdf.get_y() + 3)
-        pdf.line(115, pdf.get_y() - 5, 185, pdf.get_y() - 5)
+        # Signature lines - precisely positioned at same height
+        signature_y = pdf.get_y() + 3
+        pdf.line(25, signature_y, 95, signature_y)
+        pdf.line(115, signature_y, 185, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
@@ -354,11 +355,11 @@ class CertificateSystem:
             pdf.cell(200, 10, txt=f'"{study_title}"', ln=True, align='C')
         
         # Details box - perfectly aligned with proper spacing
-        pdf.ln(25)
+        pdf.ln(20)
         box_x = 20
         box_y = pdf.get_y()
         box_w = 170
-        box_h = 65
+        box_h = 50
         
         # Draw box with border
         pdf.set_draw_color(0, 0, 0)
@@ -402,7 +403,7 @@ class CertificateSystem:
         pdf.cell(box_w - 16, line_height, txt=f"Participant ID: {participant['email']}", ln=True)
         
         # Signature area - perfectly aligned
-        pdf.ln(35)
+        pdf.ln(20)
         pdf.set_font("Times", size=11)
         
         # Left signature area
@@ -410,15 +411,18 @@ class CertificateSystem:
         pdf.cell(55, 8, txt="Principal Investigator", ln=True, align='C')
         pdf.set_x(35)
         pdf.cell(55, 8, txt="Signature", ln=True, align='C')
-        pdf.line(35, pdf.get_y() + 2, 90, pdf.get_y() + 2)
         
         # Right signature area
         pdf.set_x(115)
-        pdf.set_y(pdf.get_y() - 16)
+        pdf.set_y(pdf.get_y() - 8)
         pdf.cell(55, 8, txt="Date", ln=True, align='C')
         pdf.set_x(115)
         pdf.cell(55, 8, txt="Signature", ln=True, align='C')
-        pdf.line(115, pdf.get_y() + 2, 170, pdf.get_y() + 2)
+        
+        # Signature lines - precisely positioned at same height
+        signature_y = pdf.get_y() + 2
+        pdf.line(35, signature_y, 90, signature_y)
+        pdf.line(115, signature_y, 170, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
@@ -487,11 +491,11 @@ class CertificateSystem:
         
         # Modern info card - perfectly aligned
         pdf.set_text_color(0, 0, 0)
-        pdf.ln(25)
+        pdf.ln(20)
         card_x = 25
         card_y = pdf.get_y()
         card_w = 160
-        card_h = 75
+        card_h = 60
         
         # Card background
         pdf.set_fill_color(255, 255, 255)
@@ -538,7 +542,7 @@ class CertificateSystem:
             pdf.cell(card_w - 16, line_height, txt=inst_text, ln=True)
         
         # Modern signature area - perfectly aligned
-        pdf.ln(30)
+        pdf.ln(20)
         pdf.set_font("Arial", style='B', size=10)
         pdf.set_text_color(70, 130, 180)
         
@@ -550,10 +554,11 @@ class CertificateSystem:
         pdf.set_x(115)
         pdf.cell(75, 8, txt="Date", ln=True, align='C')
         
-        # Signature lines with modern style - precisely positioned
+        # Signature lines with modern style - precisely positioned at same height
         pdf.set_draw_color(70, 130, 180)
-        pdf.line(30, pdf.get_y() + 3, 105, pdf.get_y() + 3)
-        pdf.line(115, pdf.get_y() - 5, 190, pdf.get_y() - 5)
+        signature_y = pdf.get_y() + 3
+        pdf.line(30, signature_y, 105, signature_y)
+        pdf.line(115, signature_y, 190, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
@@ -600,11 +605,11 @@ class CertificateSystem:
             pdf.cell(200, 8, txt=f'"{study_title}"', ln=True, align='C')
         
         # Minimal info section - perfectly aligned
-        pdf.ln(30)
+        pdf.ln(25)
         info_x = 35
         info_y = pdf.get_y()
         info_w = 140
-        info_h = 45
+        info_h = 35
         
         # Draw subtle border
         pdf.set_draw_color(200, 200, 200)
@@ -638,7 +643,7 @@ class CertificateSystem:
         pdf.cell(info_w - 16, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
         
         # Simple signature area - perfectly aligned
-        pdf.ln(25)
+        pdf.ln(20)
         pdf.set_font("Arial", size=10)
         
         # Left signature area
@@ -649,9 +654,10 @@ class CertificateSystem:
         pdf.set_x(110)
         pdf.cell(60, 8, txt="Date:", ln=True, align='C')
         
-        # Simple signature lines - precisely positioned
-        pdf.line(30, pdf.get_y() + 2, 90, pdf.get_y() + 2)
-        pdf.line(110, pdf.get_y() - 6, 170, pdf.get_y() - 6)
+        # Simple signature lines - precisely positioned at same height
+        signature_y = pdf.get_y() + 2
+        pdf.line(30, signature_y, 90, signature_y)
+        pdf.line(110, signature_y, 170, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
