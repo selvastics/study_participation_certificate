@@ -11,9 +11,9 @@ def create_sample_data():
     
     # Sample data
     data = {
-        'first_name': ['John', 'Jane', 'Michael', 'Sarah', 'David'],
-        'last_name': ['Smith', 'Johnson', 'Williams', 'Brown', 'Davis'],
-        'email': ['john.smith@email.com', 'jane.johnson@email.com', 
+        'first_name': ['Jane', 'John', 'Michael', 'Sarah', 'David'],
+        'last_name': ['Doe', 'Doe', 'Williams', 'Brown', 'Davis'],
+        'email': ['jane.doe@email.com', 'john.doe@email.com', 
                  'michael.williams@email.com', 'sarah.brown@email.com', 
                  'david.davis@email.com']
     }

@@ -245,10 +245,8 @@ class CertificateSystem:
         pdf.rect(box_x, box_y, box_w, box_h)
         
         # Content inside box - precisely positioned
-        content_x = box_x + 8
-        content_y = box_y + 8
-        pdf.set_x(content_x)
-        pdf.set_y(content_y)
+        pdf.set_x(box_x + 8)
+        pdf.set_y(box_y + 8)
         
         pdf.set_font("Arial", size=10)
         line_height = 7
@@ -367,10 +365,8 @@ class CertificateSystem:
         pdf.rect(box_x, box_y, box_w, box_h)
         
         # Content inside box - precisely positioned
-        content_x = box_x + 8
-        content_y = box_y + 8
-        pdf.set_x(content_x)
-        pdf.set_y(content_y)
+        pdf.set_x(box_x + 8)
+        pdf.set_y(box_y + 8)
         
         pdf.set_font("Times", size=10)
         line_height = 6
@@ -503,10 +499,8 @@ class CertificateSystem:
         pdf.rect(card_x, card_y, card_w, card_h, 'FD')
         
         # Card content - precisely positioned
-        content_x = card_x + 8
-        content_y = card_y + 10
-        pdf.set_x(content_x)
-        pdf.set_y(content_y)
+        pdf.set_x(card_x + 8)
+        pdf.set_y(card_y + 10)
         
         pdf.set_font("Arial", style='B', size=11)
         pdf.set_text_color(70, 130, 180)
@@ -617,10 +611,8 @@ class CertificateSystem:
         pdf.rect(info_x, info_y, info_w, info_h)
         
         # Content inside info box - precisely positioned
-        content_x = info_x + 8
-        content_y = info_y + 8
-        pdf.set_x(content_x)
-        pdf.set_y(content_y)
+        pdf.set_x(info_x + 8)
+        pdf.set_y(info_y + 8)
         
         pdf.set_font("Arial", size=9)
         line_height = 6
@@ -772,10 +764,10 @@ class CertificateSystem:
     def create_examples(self):
         """Create example certificates for all templates"""
         example_participant = {
-            'first_name': 'John',
+            'first_name': 'Jane',
             'last_name': 'Doe',
-            'full_name': 'John Doe',
-            'email': 'john.doe@example.com'
+            'full_name': 'Jane Doe',
+            'email': 'jane.doe@example.com'
         }
         
         templates = ['default', 'academic', 'modern', 'minimal']
