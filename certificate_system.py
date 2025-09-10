@@ -252,32 +252,23 @@ class CertificateSystem:
         # Position cursor inside the box
         pdf.set_xy(box_x + 15, box_y + 8)
         
-        # Study title (may be long)
+        # Study title - handle long text properly
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
-        if len(study_text) > 60:
-            pdf.multi_cell(text_width, line_height, txt=study_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=study_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
-        # Instructor
+        # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
-        if len(instructor_text) > 60:
-            pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=instructor_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
-        pdf.cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
         
-        # Organization (may be long)
+        # Organization - handle long text properly
         org_text = f"Organization: {self.config['certificate']['organization']}"
-        if len(org_text) > 60:
-            pdf.multi_cell(text_width, line_height, txt=org_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=org_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=org_text, align='L', border=0)
         
         # Signature area - perfectly aligned
         pdf.ln(15)
@@ -374,35 +365,26 @@ class CertificateSystem:
         # Position cursor inside the box
         pdf.set_xy(box_x + 15, box_y + 8)
         
-        # Study title (may be long)
+        # Study title - handle long text properly
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
-        if len(study_text) > 70:
-            pdf.multi_cell(text_width, line_height, txt=study_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=study_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
-        # Principal Investigator (may be long)
+        # Principal Investigator - handle long text properly
         pi_text = f"Principal Investigator: {self.config['certificate']['instructor_name']}"
-        if len(pi_text) > 70:
-            pdf.multi_cell(text_width, line_height, txt=pi_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=pi_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=pi_text, align='L', border=0)
         
         # Hours
-        pdf.cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
-        # Institution (may be long)
+        # Institution - handle long text properly
         inst_text = f"Institution: {self.config['certificate']['organization']}"
-        if len(inst_text) > 70:
-            pdf.multi_cell(text_width, line_height, txt=inst_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=inst_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=inst_text, align='L', border=0)
         
         # Date
-        pdf.cell(text_width, line_height, txt=f"Date of Completion: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Date of Completion: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
         
         # Participant ID
-        pdf.cell(text_width, line_height, txt=f"Participant ID: {participant['email']}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Participant ID: {participant['email']}", align='L', border=0)
         
         # Signature area - perfectly aligned
         pdf.ln(20)
@@ -517,32 +499,23 @@ class CertificateSystem:
         line_height = 6
         text_width = card_w - 30  # Account for 15px padding on each side
         
-        # Study title (may be long)
+        # Study title - handle long text properly
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
-        if len(study_text) > 65:
-            pdf.multi_cell(text_width, line_height, txt=study_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=study_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
-        # Instructor (may be long)
+        # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
-        if len(instructor_text) > 65:
-            pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=instructor_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
-        pdf.cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
         
-        # Institution (may be long)
+        # Institution - handle long text properly
         inst_text = f"Institution: {self.config['certificate']['organization']}"
-        if len(inst_text) > 65:
-            pdf.multi_cell(text_width, line_height, txt=inst_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=inst_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=inst_text, align='L', border=0)
         
         # Modern signature area - perfectly aligned
         pdf.ln(20)
@@ -626,25 +599,19 @@ class CertificateSystem:
         # Position cursor inside the box
         pdf.set_xy(info_x + 15, info_y + 8)
         
-        # Study title (may be long)
+        # Study title - handle long text properly
         study_text = f"Study: {self.config['certificate']['study_title']}"
-        if len(study_text) > 50:
-            pdf.multi_cell(text_width, line_height, txt=study_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=study_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
-        # Instructor (may be long)
+        # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
-        if len(instructor_text) > 50:
-            pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L')
-        else:
-            pdf.cell(text_width, line_height, txt=instructor_text, ln=True)
+        pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
-        pdf.cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
         
         # Simple signature area - perfectly aligned
         pdf.ln(20)
