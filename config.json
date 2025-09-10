@@ -1,0 +1,36 @@
+{
+  "email": {
+    "smtp_server": "",
+    "smtp_port": 587,
+    "username": "",
+    "password": "",
+    "use_tls": true,
+    "use_ssl": false,
+    "sender_name": "",
+    "sender_email": ""
+  },
+  "certificate": {
+    "title": "Certificate of Participation",
+    "subtitle": "Study Participation Certificate",
+    "organization": "University",
+    "department": "Psychology",
+    "instructor_name": "Dr. Instructor",
+    "study_title": "Research Study",
+    "work_unit": "Psychology Department",
+    "hours": 1.0,
+    "logo_path": "uni.jpg",
+    "signature_path": "sig.jpg",
+    "output_folder": "certificates",
+    "sent_folder": "sended"
+  },
+  "data": {
+    "excel_file": "vpdata.xlsx",
+    "name_first_column": "BE05_01",
+    "name_last_column": "BE05_02",
+    "email_column": "BE05_04",
+    "id_column": null
+  },
+  "log_level": "INFO",
+  "delay_between_emails": 2.0,
+  "max_retries": 3
+}

@@ -1,0 +1,36 @@
+{
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "username": "your-email@gmail.com",
+    "password": "your-app-password",
+    "use_tls": true,
+    "use_ssl": false,
+    "sender_name": "Forschungsteam",
+    "sender_email": "your-email@gmail.com"
+  },
+  "certificate": {
+    "title": "Nachweis \u00fcber geleistet Versuchspersonstunden",
+    "subtitle": "Studienteilnahme-Zertifikat",
+    "organization": "Westf\u00e4lische Wilhelms-Universit\u00e4t M\u00fcnster",
+    "department": "Psychologie",
+    "instructor_name": "Dr. Max Mustermann",
+    "study_title": "Kognitionsstudie zur Aufmerksamkeit",
+    "work_unit": "Institut f\u00fcr Psychologie",
+    "hours": 1.0,
+    "logo_path": "uni.jpg",
+    "signature_path": "sig.jpg",
+    "output_folder": "certificates",
+    "sent_folder": "sended"
+  },
+  "data": {
+    "excel_file": "sample_data/german_participants.xlsx",
+    "name_first_column": "BE05_01",
+    "name_last_column": "BE05_02",
+    "email_column": "BE05_04",
+    "id_column": "BE05_03"
+  },
+  "log_level": "INFO",
+  "delay_between_emails": 2.0,
+  "max_retries": 3
+}
