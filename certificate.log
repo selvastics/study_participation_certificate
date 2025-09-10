@@ -42,3 +42,39 @@
 2025-09-10 12:44:29,061 - INFO - Generated certificate for Sarah Brown
 2025-09-10 12:44:29,061 - INFO - Generated certificate for David Davis
 2025-09-10 12:44:29,061 - INFO - Generated 5/5 certificates
+2025-09-10 13:03:44,367 - INFO - Loaded 5 rows from test_long_names.xlsx
+2025-09-10 13:03:44,367 - INFO - Processed 5 valid participants
+2025-09-10 13:03:44,369 - INFO - Generated certificate for John Smith
+2025-09-10 13:03:44,370 - INFO - Generated certificate for Christopher Johnson
+2025-09-10 13:03:44,370 - INFO - Generated certificate for Alexander Williams
+2025-09-10 13:03:44,371 - INFO - Generated certificate for Maximilian Montgomery
+2025-09-10 13:03:44,372 - INFO - Generated certificate for Bartholomew Montgomery-Smythe
+2025-09-10 13:03:44,372 - INFO - Generated 5/5 certificates
+2025-09-10 13:03:44,375 - INFO - Loaded 5 rows from test_long_names.xlsx
+2025-09-10 13:03:44,375 - INFO - Processed 5 valid participants
+2025-09-10 13:03:44,376 - INFO - Generated certificate for John Smith
+2025-09-10 13:03:44,377 - INFO - Generated certificate for Christopher Johnson
+2025-09-10 13:03:44,378 - INFO - Generated certificate for Alexander Williams
+2025-09-10 13:03:44,378 - INFO - Generated certificate for Maximilian Montgomery
+2025-09-10 13:03:44,379 - INFO - Generated certificate for Bartholomew Montgomery-Smythe
+2025-09-10 13:03:44,379 - INFO - Generated 5/5 certificates
+2025-09-10 13:03:44,382 - INFO - Loaded 5 rows from test_long_names.xlsx
+2025-09-10 13:03:44,382 - INFO - Processed 5 valid participants
+2025-09-10 13:03:44,383 - INFO - Generated certificate for John Smith
+2025-09-10 13:03:44,384 - INFO - Generated certificate for Christopher Johnson
+2025-09-10 13:03:44,384 - INFO - Generated certificate for Alexander Williams
+2025-09-10 13:03:44,385 - INFO - Generated certificate for Maximilian Montgomery
+2025-09-10 13:03:44,386 - INFO - Generated certificate for Bartholomew Montgomery-Smythe
+2025-09-10 13:03:44,386 - INFO - Generated 5/5 certificates
+2025-09-10 13:03:44,389 - INFO - Loaded 5 rows from test_long_names.xlsx
+2025-09-10 13:03:44,389 - INFO - Processed 5 valid participants
+2025-09-10 13:03:44,390 - INFO - Generated certificate for John Smith
+2025-09-10 13:03:44,390 - INFO - Generated certificate for Christopher Johnson
+2025-09-10 13:03:44,391 - INFO - Generated certificate for Alexander Williams
+2025-09-10 13:03:44,391 - INFO - Generated certificate for Maximilian Montgomery
+2025-09-10 13:03:44,392 - INFO - Generated certificate for Bartholomew Montgomery-Smythe
+2025-09-10 13:03:44,392 - INFO - Generated 5/5 certificates
+2025-09-10 13:03:49,549 - INFO - Created example: examples/example_default.pdf
+2025-09-10 13:03:49,549 - INFO - Created example: examples/example_academic.pdf
+2025-09-10 13:03:49,550 - INFO - Created example: examples/example_modern.pdf
+2025-09-10 13:03:49,551 - INFO - Created example: examples/example_minimal.pdf

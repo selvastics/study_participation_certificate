@@ -180,7 +180,7 @@ class CertificateSystem:
             return False
     
     def _create_default_certificate(self, pdf, participant):
-        """Default certificate template"""
+        """Default certificate template with perfect alignment"""
         # Logo
         if os.path.exists(self.config["certificate"]["logo_path"]):
             pdf.image(self.config["certificate"]["logo_path"], x=20, y=15, w=60)
@@ -210,58 +210,98 @@ class CertificateSystem:
         pdf.set_font("Arial", size=12)
         pdf.cell(200, 8, txt="This certifies that", ln=True, align='C')
         
+        # Participant name - handle long names
         pdf.ln(8)
         pdf.set_font("Arial", style='B', size=16)
-        pdf.cell(200, 10, txt=participant['full_name'], ln=True, align='C')
+        name = participant['full_name']
+        if len(name) > 30:  # Adjust font size for very long names
+            pdf.set_font("Arial", style='B', size=14)
+        elif len(name) > 25:
+            pdf.set_font("Arial", style='B', size=15)
+        pdf.cell(200, 10, txt=name, ln=True, align='C')
         
         pdf.ln(8)
         pdf.set_font("Arial", size=12)
         pdf.cell(200, 8, txt="has successfully completed the study", ln=True, align='C')
         
+        # Study title - handle long titles
         pdf.ln(5)
         pdf.set_font("Arial", style='B', size=12)
-        pdf.cell(200, 8, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
+        study_title = self.config["certificate"]["study_title"]
+        if len(study_title) > 50:  # Use multi_cell for very long titles
+            pdf.multi_cell(180, 8, txt=f'"{study_title}"', align='C')
+        else:
+            pdf.cell(200, 8, txt=f'"{study_title}"', ln=True, align='C')
         
-        # Details box - perfectly aligned
+        # Details box - perfectly aligned with proper spacing
         pdf.ln(20)
-        box_x = 30
+        box_x = 25
         box_y = pdf.get_y()
-        box_w = 150
-        box_h = 50
+        box_w = 160
+        box_h = 55
         
         # Draw box
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(box_x, box_y, box_w, box_h)
         
-        # Content inside box - properly positioned
-        content_x = box_x + 10
+        # Content inside box - precisely positioned
+        content_x = box_x + 8
         content_y = box_y + 8
         pdf.set_x(content_x)
         pdf.set_y(content_y)
         
         pdf.set_font("Arial", size=10)
-        pdf.cell(box_w - 20, 6, txt=f"Study Title: {self.config['certificate']['study_title']}", ln=True)
-        pdf.cell(box_w - 20, 6, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
-        pdf.cell(box_w - 20, 6, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
-        pdf.cell(box_w - 20, 6, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
-        pdf.cell(box_w - 20, 6, txt=f"Organization: {self.config['certificate']['organization']}", ln=True)
+        line_height = 7
         
-        # Signature area
+        # Study title (may be long)
+        study_text = f"Study Title: {self.config['certificate']['study_title']}"
+        if len(study_text) > 70:
+            pdf.multi_cell(box_w - 16, line_height, txt=study_text, align='L')
+        else:
+            pdf.cell(box_w - 16, line_height, txt=study_text, ln=True)
+        
+        # Instructor
+        instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
+        if len(instructor_text) > 70:
+            pdf.multi_cell(box_w - 16, line_height, txt=instructor_text, align='L')
+        else:
+            pdf.cell(box_w - 16, line_height, txt=instructor_text, ln=True)
+        
+        # Hours
+        pdf.cell(box_w - 16, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        
+        # Date
+        pdf.cell(box_w - 16, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        
+        # Organization (may be long)
+        org_text = f"Organization: {self.config['certificate']['organization']}"
+        if len(org_text) > 70:
+            pdf.multi_cell(box_w - 16, line_height, txt=org_text, align='L')
+        else:
+            pdf.cell(box_w - 16, line_height, txt=org_text, ln=True)
+        
+        # Signature area - perfectly aligned
         pdf.ln(25)
         pdf.set_font("Arial", size=10)
-        pdf.cell(60, 8, txt="Instructor Signature:", ln=False)
-        pdf.cell(60, 8, txt="Date:", ln=True)
         
-        # Signature lines
-        pdf.line(20, pdf.get_y() + 3, 80, pdf.get_y() + 3)
-        pdf.line(100, pdf.get_y() - 5, 160, pdf.get_y() - 5)
+        # Left signature area
+        pdf.set_x(25)
+        pdf.cell(70, 8, txt="Instructor Signature:", ln=False)
+        
+        # Right signature area
+        pdf.set_x(115)
+        pdf.cell(70, 8, txt="Date:", ln=True)
+        
+        # Signature lines - precisely positioned
+        pdf.line(25, pdf.get_y() + 3, 95, pdf.get_y() + 3)
+        pdf.line(115, pdf.get_y() - 5, 185, pdf.get_y() - 5)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=20, y=pdf.get_y() + 5, w=50)
+            pdf.image(self.config["certificate"]["signature_path"], x=30, y=pdf.get_y() + 5, w=50)
     
     def _create_academic_certificate(self, pdf, participant):
-        """Academic-style certificate template"""
+        """Academic-style certificate template with perfect alignment"""
         # Double border
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(10, 10, 190, 280)
@@ -291,68 +331,105 @@ class CertificateSystem:
         pdf.set_font("Times", size=14)
         pdf.cell(200, 10, txt="This is to certify that", ln=True, align='C')
         
+        # Participant name - handle long names
         pdf.ln(12)
-        pdf.set_font("Times", style='B', size=18)
-        pdf.cell(200, 12, txt=participant['full_name'], ln=True, align='C')
+        name = participant['full_name']
+        if len(name) > 35:  # Adjust font size for very long names
+            pdf.set_font("Times", style='B', size=14)
+        elif len(name) > 30:
+            pdf.set_font("Times", style='B', size=16)
+        else:
+            pdf.set_font("Times", style='B', size=18)
+        pdf.cell(200, 12, txt=name, ln=True, align='C')
         
         pdf.ln(12)
         pdf.set_font("Times", size=14)
         pdf.cell(200, 10, txt="has successfully completed the research study entitled", ln=True, align='C')
         
+        # Study title - handle long titles
         pdf.ln(8)
         pdf.set_font("Times", style='I', size=14)
-        pdf.cell(200, 10, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
+        study_title = self.config["certificate"]["study_title"]
+        if len(study_title) > 60:  # Use multi_cell for very long titles
+            pdf.multi_cell(180, 10, txt=f'"{study_title}"', align='C')
+        else:
+            pdf.cell(200, 10, txt=f'"{study_title}"', ln=True, align='C')
         
-        # Details box - perfectly aligned
+        # Details box - perfectly aligned with proper spacing
         pdf.ln(25)
-        box_x = 25
+        box_x = 20
         box_y = pdf.get_y()
-        box_w = 160
-        box_h = 60
+        box_w = 170
+        box_h = 65
         
         # Draw box with border
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(box_x, box_y, box_w, box_h)
         
-        # Content inside box
+        # Content inside box - precisely positioned
         content_x = box_x + 8
-        content_y = box_y + 10
+        content_y = box_y + 8
         pdf.set_x(content_x)
         pdf.set_y(content_y)
         
-        pdf.set_font("Times", size=11)
-        pdf.cell(box_w - 16, 7, txt=f"Study Title: {self.config['certificate']['study_title']}", ln=True)
-        pdf.cell(box_w - 16, 7, txt=f"Principal Investigator: {self.config['certificate']['instructor_name']}", ln=True)
-        pdf.cell(box_w - 16, 7, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
-        pdf.cell(box_w - 16, 7, txt=f"Institution: {self.config['certificate']['organization']}", ln=True)
-        pdf.cell(box_w - 16, 7, txt=f"Date of Completion: {datetime.now().strftime('%B %d, %Y')}", ln=True)
-        pdf.cell(box_w - 16, 7, txt=f"Participant ID: {participant['email']}", ln=True)
+        pdf.set_font("Times", size=10)
+        line_height = 6
         
-        # Signature area
+        # Study title (may be long)
+        study_text = f"Study Title: {self.config['certificate']['study_title']}"
+        if len(study_text) > 80:
+            pdf.multi_cell(box_w - 16, line_height, txt=study_text, align='L')
+        else:
+            pdf.cell(box_w - 16, line_height, txt=study_text, ln=True)
+        
+        # Principal Investigator (may be long)
+        pi_text = f"Principal Investigator: {self.config['certificate']['instructor_name']}"
+        if len(pi_text) > 80:
+            pdf.multi_cell(box_w - 16, line_height, txt=pi_text, align='L')
+        else:
+            pdf.cell(box_w - 16, line_height, txt=pi_text, ln=True)
+        
+        # Hours
+        pdf.cell(box_w - 16, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        
+        # Institution (may be long)
+        inst_text = f"Institution: {self.config['certificate']['organization']}"
+        if len(inst_text) > 80:
+            pdf.multi_cell(box_w - 16, line_height, txt=inst_text, align='L')
+        else:
+            pdf.cell(box_w - 16, line_height, txt=inst_text, ln=True)
+        
+        # Date
+        pdf.cell(box_w - 16, line_height, txt=f"Date of Completion: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        
+        # Participant ID
+        pdf.cell(box_w - 16, line_height, txt=f"Participant ID: {participant['email']}", ln=True)
+        
+        # Signature area - perfectly aligned
         pdf.ln(35)
         pdf.set_font("Times", size=11)
         
-        # Left signature
-        pdf.set_x(40)
-        pdf.cell(50, 8, txt="Principal Investigator", ln=True, align='C')
-        pdf.set_x(40)
-        pdf.cell(50, 8, txt="Signature", ln=True, align='C')
-        pdf.line(40, pdf.get_y() + 2, 90, pdf.get_y() + 2)
+        # Left signature area
+        pdf.set_x(35)
+        pdf.cell(55, 8, txt="Principal Investigator", ln=True, align='C')
+        pdf.set_x(35)
+        pdf.cell(55, 8, txt="Signature", ln=True, align='C')
+        pdf.line(35, pdf.get_y() + 2, 90, pdf.get_y() + 2)
         
-        # Right signature
-        pdf.set_x(120)
+        # Right signature area
+        pdf.set_x(115)
         pdf.set_y(pdf.get_y() - 16)
-        pdf.cell(50, 8, txt="Date", ln=True, align='C')
-        pdf.set_x(120)
-        pdf.cell(50, 8, txt="Signature", ln=True, align='C')
-        pdf.line(120, pdf.get_y() + 2, 170, pdf.get_y() + 2)
+        pdf.cell(55, 8, txt="Date", ln=True, align='C')
+        pdf.set_x(115)
+        pdf.cell(55, 8, txt="Signature", ln=True, align='C')
+        pdf.line(115, pdf.get_y() + 2, 170, pdf.get_y() + 2)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=45, y=pdf.get_y() + 5, w=40)
+            pdf.image(self.config["certificate"]["signature_path"], x=40, y=pdf.get_y() + 5, w=40)
     
     def _create_modern_certificate(self, pdf, participant):
-        """Modern design certificate template"""
+        """Modern design certificate template with perfect alignment"""
         # Background color (light blue)
         pdf.set_fill_color(240, 248, 255)
         pdf.rect(0, 0, 210, 297, 'F')
@@ -385,70 +462,111 @@ class CertificateSystem:
         pdf.set_font("Arial", size=14)
         pdf.cell(200, 10, txt="This certifies that", ln=True, align='C')
         
+        # Participant name - handle long names
         pdf.ln(12)
-        pdf.set_font("Arial", style='B', size=18)
+        name = participant['full_name']
+        if len(name) > 30:  # Adjust font size for very long names
+            pdf.set_font("Arial", style='B', size=14)
+        elif len(name) > 25:
+            pdf.set_font("Arial", style='B', size=16)
+        else:
+            pdf.set_font("Arial", style='B', size=18)
         pdf.set_text_color(70, 130, 180)
-        pdf.cell(200, 12, txt=participant['full_name'], ln=True, align='C')
+        pdf.cell(200, 12, txt=name, ln=True, align='C')
         
         pdf.set_text_color(0, 0, 0)
         pdf.ln(12)
         pdf.set_font("Arial", size=12)
         pdf.cell(200, 8, txt="has successfully completed the study", ln=True, align='C')
         
+        # Study title - handle long titles
         pdf.ln(8)
         pdf.set_font("Arial", style='B', size=14)
         pdf.set_text_color(70, 130, 180)
-        pdf.cell(200, 10, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
+        study_title = self.config["certificate"]["study_title"]
+        if len(study_title) > 50:  # Use multi_cell for very long titles
+            pdf.multi_cell(180, 10, txt=f'"{study_title}"', align='C')
+        else:
+            pdf.cell(200, 10, txt=f'"{study_title}"', ln=True, align='C')
         
         # Modern info card - perfectly aligned
         pdf.set_text_color(0, 0, 0)
         pdf.ln(25)
-        card_x = 30
+        card_x = 25
         card_y = pdf.get_y()
-        card_w = 150
-        card_h = 70
+        card_w = 160
+        card_h = 75
         
         # Card background
         pdf.set_fill_color(255, 255, 255)
         pdf.set_draw_color(70, 130, 180)
         pdf.rect(card_x, card_y, card_w, card_h, 'FD')
         
-        # Card content - properly positioned
-        content_x = card_x + 10
-        content_y = card_y + 12
+        # Card content - precisely positioned
+        content_x = card_x + 8
+        content_y = card_y + 10
         pdf.set_x(content_x)
         pdf.set_y(content_y)
         
         pdf.set_font("Arial", style='B', size=11)
         pdf.set_text_color(70, 130, 180)
-        pdf.cell(card_w - 20, 8, txt="STUDY DETAILS", ln=True, align='C')
+        pdf.cell(card_w - 16, 8, txt="STUDY DETAILS", ln=True, align='C')
         
         pdf.set_text_color(0, 0, 0)
-        pdf.set_font("Arial", size=10)
-        pdf.cell(card_w - 20, 6, txt=f"Study Title: {self.config['certificate']['study_title']}", ln=True)
-        pdf.cell(card_w - 20, 6, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
-        pdf.cell(card_w - 20, 6, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
-        pdf.cell(card_w - 20, 6, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
-        pdf.cell(card_w - 20, 6, txt=f"Institution: {self.config['certificate']['organization']}", ln=True)
+        pdf.set_font("Arial", size=9)
+        line_height = 6
         
-        # Modern signature area
+        # Study title (may be long)
+        study_text = f"Study Title: {self.config['certificate']['study_title']}"
+        if len(study_text) > 75:
+            pdf.multi_cell(card_w - 16, line_height, txt=study_text, align='L')
+        else:
+            pdf.cell(card_w - 16, line_height, txt=study_text, ln=True)
+        
+        # Instructor (may be long)
+        instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
+        if len(instructor_text) > 75:
+            pdf.multi_cell(card_w - 16, line_height, txt=instructor_text, align='L')
+        else:
+            pdf.cell(card_w - 16, line_height, txt=instructor_text, ln=True)
+        
+        # Hours
+        pdf.cell(card_w - 16, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        
+        # Date
+        pdf.cell(card_w - 16, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        
+        # Institution (may be long)
+        inst_text = f"Institution: {self.config['certificate']['organization']}"
+        if len(inst_text) > 75:
+            pdf.multi_cell(card_w - 16, line_height, txt=inst_text, align='L')
+        else:
+            pdf.cell(card_w - 16, line_height, txt=inst_text, ln=True)
+        
+        # Modern signature area - perfectly aligned
         pdf.ln(30)
         pdf.set_font("Arial", style='B', size=10)
         pdf.set_text_color(70, 130, 180)
-        pdf.cell(80, 8, txt="Instructor Signature", ln=False, align='C')
-        pdf.cell(80, 8, txt="Date", ln=True, align='C')
         
-        # Signature lines with modern style
+        # Left signature area
+        pdf.set_x(30)
+        pdf.cell(75, 8, txt="Instructor Signature", ln=False, align='C')
+        
+        # Right signature area
+        pdf.set_x(115)
+        pdf.cell(75, 8, txt="Date", ln=True, align='C')
+        
+        # Signature lines with modern style - precisely positioned
         pdf.set_draw_color(70, 130, 180)
-        pdf.line(30, pdf.get_y() + 3, 110, pdf.get_y() + 3)
-        pdf.line(130, pdf.get_y() - 5, 210, pdf.get_y() - 5)
+        pdf.line(30, pdf.get_y() + 3, 105, pdf.get_y() + 3)
+        pdf.line(115, pdf.get_y() - 5, 190, pdf.get_y() - 5)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
             pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y() + 5, w=45)
     
     def _create_minimal_certificate(self, pdf, participant):
-        """Minimal design certificate template"""
+        """Minimal design certificate template with perfect alignment"""
         # Clean, centered design
         pdf.set_y(60)
         pdf.set_font("Arial", style='B', size=16)
@@ -463,48 +581,83 @@ class CertificateSystem:
         pdf.set_font("Arial", size=12)
         pdf.cell(200, 8, txt="This is to certify that", ln=True, align='C')
         
+        # Participant name - handle long names
         pdf.ln(12)
-        pdf.set_font("Arial", style='B', size=16)
-        pdf.cell(200, 10, txt=participant['full_name'], ln=True, align='C')
+        name = participant['full_name']
+        if len(name) > 35:  # Adjust font size for very long names
+            pdf.set_font("Arial", style='B', size=12)
+        elif len(name) > 30:
+            pdf.set_font("Arial", style='B', size=14)
+        else:
+            pdf.set_font("Arial", style='B', size=16)
+        pdf.cell(200, 10, txt=name, ln=True, align='C')
         
         pdf.ln(12)
         pdf.set_font("Arial", size=12)
         pdf.cell(200, 8, txt="has successfully completed", ln=True, align='C')
         
+        # Study title - handle long titles
         pdf.ln(8)
         pdf.set_font("Arial", style='B', size=12)
-        pdf.cell(200, 8, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
+        study_title = self.config["certificate"]["study_title"]
+        if len(study_title) > 50:  # Use multi_cell for very long titles
+            pdf.multi_cell(180, 8, txt=f'"{study_title}"', align='C')
+        else:
+            pdf.cell(200, 8, txt=f'"{study_title}"', ln=True, align='C')
         
         # Minimal info section - perfectly aligned
         pdf.ln(30)
-        info_x = 40
+        info_x = 35
         info_y = pdf.get_y()
-        info_w = 130
-        info_h = 40
+        info_w = 140
+        info_h = 45
         
         # Draw subtle border
         pdf.set_draw_color(200, 200, 200)
         pdf.rect(info_x, info_y, info_w, info_h)
         
-        # Content inside info box
+        # Content inside info box - precisely positioned
         content_x = info_x + 8
         content_y = info_y + 8
         pdf.set_x(content_x)
         pdf.set_y(content_y)
         
-        pdf.set_font("Arial", size=10)
-        pdf.cell(info_w - 16, 6, txt=f"Study: {self.config['certificate']['study_title']}", ln=True)
-        pdf.cell(info_w - 16, 6, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
-        pdf.cell(info_w - 16, 6, txt=f"Hours: {self.config['certificate']['hours']}", ln=True)
-        pdf.cell(info_w - 16, 6, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.set_font("Arial", size=9)
+        line_height = 6
         
-        # Simple signature area
+        # Study title (may be long)
+        study_text = f"Study: {self.config['certificate']['study_title']}"
+        if len(study_text) > 60:
+            pdf.multi_cell(info_w - 16, line_height, txt=study_text, align='L')
+        else:
+            pdf.cell(info_w - 16, line_height, txt=study_text, ln=True)
+        
+        # Instructor (may be long)
+        instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
+        if len(instructor_text) > 60:
+            pdf.multi_cell(info_w - 16, line_height, txt=instructor_text, align='L')
+        else:
+            pdf.cell(info_w - 16, line_height, txt=instructor_text, ln=True)
+        
+        # Hours
+        pdf.cell(info_w - 16, line_height, txt=f"Hours: {self.config['certificate']['hours']}", ln=True)
+        
+        # Date
+        pdf.cell(info_w - 16, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        
+        # Simple signature area - perfectly aligned
         pdf.ln(25)
         pdf.set_font("Arial", size=10)
+        
+        # Left signature area
+        pdf.set_x(30)
         pdf.cell(60, 8, txt="Signature:", ln=False, align='C')
+        
+        # Right signature area
+        pdf.set_x(110)
         pdf.cell(60, 8, txt="Date:", ln=True, align='C')
         
-        # Simple signature lines
+        # Simple signature lines - precisely positioned
         pdf.line(30, pdf.get_y() + 2, 90, pdf.get_y() + 2)
         pdf.line(110, pdf.get_y() - 6, 170, pdf.get_y() - 6)
         
