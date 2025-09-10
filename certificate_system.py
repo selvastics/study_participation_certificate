@@ -244,13 +244,13 @@ class CertificateSystem:
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(box_x, box_y, box_w, box_h)
         
-        # Content inside box - precisely positioned
-        pdf.set_x(box_x + 15)
-        pdf.set_y(box_y + 8)
-        
+        # Content inside box - precisely positioned within the box
         pdf.set_font("Arial", size=10)
         line_height = 7
         text_width = box_w - 30  # Account for 15px padding on each side
+        
+        # Position cursor inside the box
+        pdf.set_xy(box_x + 15, box_y + 8)
         
         # Study title (may be long)
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
@@ -366,13 +366,13 @@ class CertificateSystem:
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(box_x, box_y, box_w, box_h)
         
-        # Content inside box - precisely positioned
-        pdf.set_x(box_x + 15)
-        pdf.set_y(box_y + 8)
-        
+        # Content inside box - precisely positioned within the box
         pdf.set_font("Times", size=10)
         line_height = 6
         text_width = box_w - 30  # Account for 15px padding on each side
+        
+        # Position cursor inside the box
+        pdf.set_xy(box_x + 15, box_y + 8)
         
         # Study title (may be long)
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
@@ -504,13 +504,13 @@ class CertificateSystem:
         pdf.set_draw_color(70, 130, 180)
         pdf.rect(card_x, card_y, card_w, card_h, 'FD')
         
-        # Card content - precisely positioned
-        pdf.set_x(card_x + 15)
-        pdf.set_y(card_y + 10)
-        
+        # Card content - precisely positioned within the card
         pdf.set_font("Arial", style='B', size=11)
         pdf.set_text_color(70, 130, 180)
-        pdf.cell(card_w - 16, 8, txt="STUDY DETAILS", ln=True, align='C')
+        
+        # Position cursor inside the card for header
+        pdf.set_xy(card_x + 15, card_y + 10)
+        pdf.cell(card_w - 30, 8, txt="STUDY DETAILS", ln=True, align='C')
         
         pdf.set_text_color(0, 0, 0)
         pdf.set_font("Arial", size=9)
@@ -618,13 +618,13 @@ class CertificateSystem:
         pdf.set_draw_color(200, 200, 200)
         pdf.rect(info_x, info_y, info_w, info_h)
         
-        # Content inside info box - precisely positioned
-        pdf.set_x(info_x + 15)
-        pdf.set_y(info_y + 8)
-        
+        # Content inside info box - precisely positioned within the box
         pdf.set_font("Arial", size=9)
         line_height = 6
         text_width = info_w - 30  # Account for 15px padding on each side
+        
+        # Position cursor inside the box
+        pdf.set_xy(info_x + 15, info_y + 8)
         
         # Study title (may be long)
         study_text = f"Study: {self.config['certificate']['study_title']}"
