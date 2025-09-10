@@ -1,11 +1,9 @@
 # Quick Start Guide
 
-Get up and running with Certificate Generator in 5 minutes!
-
 ## 1. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install fpdf pandas openpyxl
 ```
 
 ## 2. Create Sample Data
@@ -14,15 +12,13 @@ pip install -r requirements.txt
 python sample_data_template.py
 ```
 
-This creates sample Excel files and configuration files in the `sample_data/` directory.
-
-## 3. Configure Your Settings
+## 3. Configure Settings
 
 ```bash
 cp config_example.json config.json
 ```
 
-Edit `config.json` with your email settings and study details.
+Edit `config.json` with your email and study details.
 
 ## 4. Test the System
 
@@ -40,28 +36,12 @@ python main.py status
 ## 5. Run Complete Workflow
 
 ```bash
-# Run everything at once
 python main.py workflow --excel sample_data/basic_participants.xlsx
 ```
-
-## 6. Customize for Your Needs
-
-- Edit `config.json` for your specific study
-- Modify certificate templates in `certificate_generator.py`
-- Create custom email templates
-- Add your own logo and signature images
 
 ## Troubleshooting
 
 - Check logs in `logs/certificate_generator.log`
-- Verify your Excel file has the correct column names
-- Test email configuration before sending bulk emails
+- Verify Excel file has correct column names
+- Test email configuration before sending
 - Ensure image files (logo, signature) exist
-
-## Next Steps
-
-- Read the full [README.md](README.md) for detailed documentation
-- Check out examples in the `examples/` directory
-- Customize templates for your specific needs
-
-Happy certificate generating! 🎓
