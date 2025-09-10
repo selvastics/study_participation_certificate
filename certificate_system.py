@@ -185,95 +185,171 @@ class CertificateSystem:
         if os.path.exists(self.config["certificate"]["logo_path"]):
             pdf.image(self.config["certificate"]["logo_path"], x=20, y=15, w=60)
         
-        # Header
+        # Header - Organization (right aligned)
         pdf.set_y(15)
         pdf.set_font("Arial", size=11)
         pdf.cell(0, 10, txt=self.config["certificate"]["organization"], ln=True, align='R')
         
-        pdf.ln(20)
-        pdf.set_font("Arial", style='B', size=16)
-        pdf.cell(200, 10, txt=self.config["certificate"]["title"], ln=True, align='C')
+        # Main title
+        pdf.ln(25)
+        pdf.set_font("Arial", style='B', size=18)
+        pdf.cell(200, 12, txt=self.config["certificate"]["title"], ln=True, align='C')
         
-        pdf.ln(15)
-        pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt="This certifies that", ln=True, align='C')
-        
+        # Subtitle
         pdf.ln(5)
-        pdf.set_font("Arial", style='B', size=14)
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 8, txt="Research Study Participation Certificate", ln=True, align='C')
+        
+        # Decorative line
+        pdf.ln(10)
+        pdf.set_draw_color(0, 0, 0)
+        pdf.line(60, pdf.get_y(), 150, pdf.get_y())
+        
+        # Certificate text
+        pdf.ln(20)
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 8, txt="This certifies that", ln=True, align='C')
+        
+        pdf.ln(8)
+        pdf.set_font("Arial", style='B', size=16)
         pdf.cell(200, 10, txt=participant['full_name'], ln=True, align='C')
         
-        pdf.ln(10)
+        pdf.ln(8)
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt=f"has successfully completed {self.config['certificate']['study_title']}", ln=True, align='C')
+        pdf.cell(200, 8, txt="has successfully completed the study", ln=True, align='C')
         
-        # Details box
-        pdf.ln(15)
-        pdf.set_draw_color(0, 0, 0)
-        pdf.rect(30, pdf.get_y(), 150, 40)
+        pdf.ln(5)
+        pdf.set_font("Arial", style='B', size=12)
+        pdf.cell(200, 8, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
         
-        pdf.set_x(35)
-        pdf.set_y(pdf.get_y() + 5)
-        pdf.set_font("Arial", size=10)
-        pdf.cell(140, 8, txt=f"Study: {self.config['certificate']['study_title']}", ln=True)
-        pdf.cell(140, 8, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
-        pdf.cell(140, 8, txt=f"Hours: {self.config['certificate']['hours']}", ln=True)
-        pdf.cell(140, 8, txt=f"Date: {datetime.now().strftime('%Y-%m-%d')}", ln=True)
-        
-        # Signature
+        # Details box - perfectly aligned
         pdf.ln(20)
+        box_x = 30
+        box_y = pdf.get_y()
+        box_w = 150
+        box_h = 50
+        
+        # Draw box
+        pdf.set_draw_color(0, 0, 0)
+        pdf.rect(box_x, box_y, box_w, box_h)
+        
+        # Content inside box - properly positioned
+        content_x = box_x + 10
+        content_y = box_y + 8
+        pdf.set_x(content_x)
+        pdf.set_y(content_y)
+        
+        pdf.set_font("Arial", size=10)
+        pdf.cell(box_w - 20, 6, txt=f"Study Title: {self.config['certificate']['study_title']}", ln=True)
+        pdf.cell(box_w - 20, 6, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
+        pdf.cell(box_w - 20, 6, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        pdf.cell(box_w - 20, 6, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.cell(box_w - 20, 6, txt=f"Organization: {self.config['certificate']['organization']}", ln=True)
+        
+        # Signature area
+        pdf.ln(25)
+        pdf.set_font("Arial", size=10)
+        pdf.cell(60, 8, txt="Instructor Signature:", ln=False)
+        pdf.cell(60, 8, txt="Date:", ln=True)
+        
+        # Signature lines
+        pdf.line(20, pdf.get_y() + 3, 80, pdf.get_y() + 3)
+        pdf.line(100, pdf.get_y() - 5, 160, pdf.get_y() - 5)
+        
+        # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=50, y=pdf.get_y(), w=60)
+            pdf.image(self.config["certificate"]["signature_path"], x=20, y=pdf.get_y() + 5, w=50)
     
     def _create_academic_certificate(self, pdf, participant):
         """Academic-style certificate template"""
-        # Border
+        # Double border
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(10, 10, 190, 280)
         pdf.rect(15, 15, 180, 270)
         
-        # Title
-        pdf.set_y(40)
-        pdf.set_font("Times", style='B', size=20)
+        # University logo/header
+        if os.path.exists(self.config["certificate"]["logo_path"]):
+            pdf.image(self.config["certificate"]["logo_path"], x=20, y=25, w=50)
+        
+        # University name (right aligned)
+        pdf.set_y(25)
+        pdf.set_font("Times", style='B', size=12)
+        pdf.cell(0, 8, txt=self.config["certificate"]["organization"], ln=True, align='R')
+        
+        # Main title
+        pdf.set_y(60)
+        pdf.set_font("Times", style='B', size=22)
         pdf.cell(200, 15, txt="CERTIFICATE OF COMPLETION", ln=True, align='C')
         
         # Decorative line
-        pdf.ln(10)
-        pdf.line(60, pdf.get_y(), 150, pdf.get_y())
+        pdf.ln(8)
+        pdf.set_draw_color(0, 0, 0)
+        pdf.line(70, pdf.get_y(), 140, pdf.get_y())
         
-        # Content
-        pdf.ln(20)
+        # Certificate text
+        pdf.ln(25)
         pdf.set_font("Times", size=14)
         pdf.cell(200, 10, txt="This is to certify that", ln=True, align='C')
         
-        pdf.ln(10)
-        pdf.set_font("Times", style='B', size=16)
-        pdf.cell(200, 15, txt=participant['full_name'], ln=True, align='C')
+        pdf.ln(12)
+        pdf.set_font("Times", style='B', size=18)
+        pdf.cell(200, 12, txt=participant['full_name'], ln=True, align='C')
         
-        pdf.ln(10)
+        pdf.ln(12)
         pdf.set_font("Times", size=14)
-        pdf.cell(200, 10, txt=f"has successfully completed the study entitled", ln=True, align='C')
+        pdf.cell(200, 10, txt="has successfully completed the research study entitled", ln=True, align='C')
         
-        pdf.ln(5)
+        pdf.ln(8)
         pdf.set_font("Times", style='I', size=14)
         pdf.cell(200, 10, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
         
-        # Details
-        pdf.ln(20)
-        pdf.set_font("Times", size=12)
-        pdf.cell(200, 8, txt=f"Conducted by: {self.config['certificate']['instructor_name']}", ln=True, align='C')
-        pdf.cell(200, 8, txt=f"Organization: {self.config['certificate']['organization']}", ln=True, align='C')
-        pdf.cell(200, 8, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True, align='C')
+        # Details box - perfectly aligned
+        pdf.ln(25)
+        box_x = 25
+        box_y = pdf.get_y()
+        box_w = 160
+        box_h = 60
+        
+        # Draw box with border
+        pdf.set_draw_color(0, 0, 0)
+        pdf.rect(box_x, box_y, box_w, box_h)
+        
+        # Content inside box
+        content_x = box_x + 8
+        content_y = box_y + 10
+        pdf.set_x(content_x)
+        pdf.set_y(content_y)
+        
+        pdf.set_font("Times", size=11)
+        pdf.cell(box_w - 16, 7, txt=f"Study Title: {self.config['certificate']['study_title']}", ln=True)
+        pdf.cell(box_w - 16, 7, txt=f"Principal Investigator: {self.config['certificate']['instructor_name']}", ln=True)
+        pdf.cell(box_w - 16, 7, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        pdf.cell(box_w - 16, 7, txt=f"Institution: {self.config['certificate']['organization']}", ln=True)
+        pdf.cell(box_w - 16, 7, txt=f"Date of Completion: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.cell(box_w - 16, 7, txt=f"Participant ID: {participant['email']}", ln=True)
         
         # Signature area
-        pdf.ln(30)
-        pdf.set_x(50)
-        pdf.set_font("Times", size=10)
-        pdf.cell(40, 8, txt="Instructor Signature", ln=False)
-        pdf.set_x(120)
-        pdf.cell(40, 8, txt="Date", ln=True)
+        pdf.ln(35)
+        pdf.set_font("Times", size=11)
         
-        pdf.line(50, pdf.get_y() + 5, 90, pdf.get_y() + 5)
-        pdf.line(120, pdf.get_y() - 5, 160, pdf.get_y() - 5)
+        # Left signature
+        pdf.set_x(40)
+        pdf.cell(50, 8, txt="Principal Investigator", ln=True, align='C')
+        pdf.set_x(40)
+        pdf.cell(50, 8, txt="Signature", ln=True, align='C')
+        pdf.line(40, pdf.get_y() + 2, 90, pdf.get_y() + 2)
+        
+        # Right signature
+        pdf.set_x(120)
+        pdf.set_y(pdf.get_y() - 16)
+        pdf.cell(50, 8, txt="Date", ln=True, align='C')
+        pdf.set_x(120)
+        pdf.cell(50, 8, txt="Signature", ln=True, align='C')
+        pdf.line(120, pdf.get_y() + 2, 170, pdf.get_y() + 2)
+        
+        # Add signature image if available
+        if os.path.exists(self.config["certificate"]["signature_path"]):
+            pdf.image(self.config["certificate"]["signature_path"], x=45, y=pdf.get_y() + 5, w=40)
     
     def _create_modern_certificate(self, pdf, participant):
         """Modern design certificate template"""
@@ -283,11 +359,21 @@ class CertificateSystem:
         
         # Header with gradient effect
         pdf.set_fill_color(70, 130, 180)
-        pdf.rect(0, 0, 210, 60, 'F')
+        pdf.rect(0, 0, 210, 70, 'F')
         
-        # Title
-        pdf.set_y(25)
-        pdf.set_font("Arial", style='B', size=18)
+        # Logo in header
+        if os.path.exists(self.config["certificate"]["logo_path"]):
+            pdf.image(self.config["certificate"]["logo_path"], x=20, y=15, w=40)
+        
+        # Organization name
+        pdf.set_y(20)
+        pdf.set_font("Arial", style='B', size=12)
+        pdf.set_text_color(255, 255, 255)
+        pdf.cell(0, 8, txt=self.config["certificate"]["organization"], ln=True, align='R')
+        
+        # Main title
+        pdf.set_y(35)
+        pdf.set_font("Arial", style='B', size=20)
         pdf.set_text_color(255, 255, 255)
         pdf.cell(200, 15, txt="CERTIFICATE OF ACHIEVEMENT", ln=True, align='C')
         
@@ -295,61 +381,136 @@ class CertificateSystem:
         pdf.set_text_color(0, 0, 0)
         
         # Main content area
-        pdf.set_y(80)
+        pdf.set_y(90)
         pdf.set_font("Arial", size=14)
         pdf.cell(200, 10, txt="This certifies that", ln=True, align='C')
         
-        pdf.ln(10)
-        pdf.set_font("Arial", style='B', size=16)
+        pdf.ln(12)
+        pdf.set_font("Arial", style='B', size=18)
         pdf.set_text_color(70, 130, 180)
-        pdf.cell(200, 15, txt=participant['full_name'], ln=True, align='C')
+        pdf.cell(200, 12, txt=participant['full_name'], ln=True, align='C')
         
         pdf.set_text_color(0, 0, 0)
-        pdf.ln(10)
+        pdf.ln(12)
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt=f"has successfully completed", ln=True, align='C')
+        pdf.cell(200, 8, txt="has successfully completed the study", ln=True, align='C')
         
-        pdf.ln(5)
+        pdf.ln(8)
         pdf.set_font("Arial", style='B', size=14)
-        pdf.cell(200, 10, txt=self.config["certificate"]["study_title"], ln=True, align='C')
+        pdf.set_text_color(70, 130, 180)
+        pdf.cell(200, 10, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
         
-        # Info box
-        pdf.ln(20)
+        # Modern info card - perfectly aligned
+        pdf.set_text_color(0, 0, 0)
+        pdf.ln(25)
+        card_x = 30
+        card_y = pdf.get_y()
+        card_w = 150
+        card_h = 70
+        
+        # Card background
         pdf.set_fill_color(255, 255, 255)
         pdf.set_draw_color(70, 130, 180)
-        pdf.rect(40, pdf.get_y(), 130, 50, 'FD')
+        pdf.rect(card_x, card_y, card_w, card_h, 'FD')
         
-        pdf.set_x(45)
-        pdf.set_y(pdf.get_y() + 5)
+        # Card content - properly positioned
+        content_x = card_x + 10
+        content_y = card_y + 12
+        pdf.set_x(content_x)
+        pdf.set_y(content_y)
+        
+        pdf.set_font("Arial", style='B', size=11)
+        pdf.set_text_color(70, 130, 180)
+        pdf.cell(card_w - 20, 8, txt="STUDY DETAILS", ln=True, align='C')
+        
+        pdf.set_text_color(0, 0, 0)
         pdf.set_font("Arial", size=10)
-        pdf.cell(120, 8, txt=f"Study: {self.config['certificate']['study_title']}", ln=True)
-        pdf.cell(120, 8, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
-        pdf.cell(120, 8, txt=f"Hours: {self.config['certificate']['hours']}", ln=True)
-        pdf.cell(120, 8, txt=f"Date: {datetime.now().strftime('%Y-%m-%d')}", ln=True)
+        pdf.cell(card_w - 20, 6, txt=f"Study Title: {self.config['certificate']['study_title']}", ln=True)
+        pdf.cell(card_w - 20, 6, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
+        pdf.cell(card_w - 20, 6, txt=f"Hours Completed: {self.config['certificate']['hours']}", ln=True)
+        pdf.cell(card_w - 20, 6, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        pdf.cell(card_w - 20, 6, txt=f"Institution: {self.config['certificate']['organization']}", ln=True)
+        
+        # Modern signature area
+        pdf.ln(30)
+        pdf.set_font("Arial", style='B', size=10)
+        pdf.set_text_color(70, 130, 180)
+        pdf.cell(80, 8, txt="Instructor Signature", ln=False, align='C')
+        pdf.cell(80, 8, txt="Date", ln=True, align='C')
+        
+        # Signature lines with modern style
+        pdf.set_draw_color(70, 130, 180)
+        pdf.line(30, pdf.get_y() + 3, 110, pdf.get_y() + 3)
+        pdf.line(130, pdf.get_y() - 5, 210, pdf.get_y() - 5)
+        
+        # Add signature image if available
+        if os.path.exists(self.config["certificate"]["signature_path"]):
+            pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y() + 5, w=45)
     
     def _create_minimal_certificate(self, pdf, participant):
         """Minimal design certificate template"""
-        # Simple centered design
-        pdf.set_y(50)
-        pdf.set_font("Arial", style='B', size=14)
+        # Clean, centered design
+        pdf.set_y(60)
+        pdf.set_font("Arial", style='B', size=16)
         pdf.cell(200, 10, txt="CERTIFICATE", ln=True, align='C')
         
-        pdf.ln(20)
-        pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt="This is to certify that", ln=True, align='C')
+        # Decorative line
+        pdf.ln(8)
+        pdf.set_draw_color(0, 0, 0)
+        pdf.line(80, pdf.get_y(), 130, pdf.get_y())
         
-        pdf.ln(10)
-        pdf.set_font("Arial", style='B', size=14)
+        pdf.ln(25)
+        pdf.set_font("Arial", size=12)
+        pdf.cell(200, 8, txt="This is to certify that", ln=True, align='C')
+        
+        pdf.ln(12)
+        pdf.set_font("Arial", style='B', size=16)
         pdf.cell(200, 10, txt=participant['full_name'], ln=True, align='C')
         
-        pdf.ln(10)
+        pdf.ln(12)
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 10, txt=f"completed {self.config['certificate']['study_title']}", ln=True, align='C')
+        pdf.cell(200, 8, txt="has successfully completed", ln=True, align='C')
         
-        pdf.ln(20)
+        pdf.ln(8)
+        pdf.set_font("Arial", style='B', size=12)
+        pdf.cell(200, 8, txt=f'"{self.config["certificate"]["study_title"]}"', ln=True, align='C')
+        
+        # Minimal info section - perfectly aligned
+        pdf.ln(30)
+        info_x = 40
+        info_y = pdf.get_y()
+        info_w = 130
+        info_h = 40
+        
+        # Draw subtle border
+        pdf.set_draw_color(200, 200, 200)
+        pdf.rect(info_x, info_y, info_w, info_h)
+        
+        # Content inside info box
+        content_x = info_x + 8
+        content_y = info_y + 8
+        pdf.set_x(content_x)
+        pdf.set_y(content_y)
+        
         pdf.set_font("Arial", size=10)
-        pdf.cell(200, 8, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True, align='C')
-        pdf.cell(200, 8, txt=f"Date: {datetime.now().strftime('%Y-%m-%d')}", ln=True, align='C')
+        pdf.cell(info_w - 16, 6, txt=f"Study: {self.config['certificate']['study_title']}", ln=True)
+        pdf.cell(info_w - 16, 6, txt=f"Instructor: {self.config['certificate']['instructor_name']}", ln=True)
+        pdf.cell(info_w - 16, 6, txt=f"Hours: {self.config['certificate']['hours']}", ln=True)
+        pdf.cell(info_w - 16, 6, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", ln=True)
+        
+        # Simple signature area
+        pdf.ln(25)
+        pdf.set_font("Arial", size=10)
+        pdf.cell(60, 8, txt="Signature:", ln=False, align='C')
+        pdf.cell(60, 8, txt="Date:", ln=True, align='C')
+        
+        # Simple signature lines
+        pdf.line(30, pdf.get_y() + 2, 90, pdf.get_y() + 2)
+        pdf.line(110, pdf.get_y() - 6, 170, pdf.get_y() - 6)
+        
+        # Add signature image if available
+        if os.path.exists(self.config["certificate"]["signature_path"]):
+            pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y() + 3, w=40)
     
     def send_emails(self, template="default"):
         """Send certificates via email"""
