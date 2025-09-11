@@ -210,3 +210,43 @@
 2025-09-11 10:46:15,706 - INFO - Generated certificate for Sarah Brown
 2025-09-11 10:46:15,707 - INFO - Generated certificate for David Davis
 2025-09-11 10:46:15,707 - INFO - Generated 5/5 certificates
+2025-09-11 10:54:20,845 - INFO - Created example: examples/example_default.pdf
+2025-09-11 10:54:20,846 - INFO - Created example: examples/example_academic.pdf
+2025-09-11 10:54:20,847 - INFO - Created example: examples/example_modern.pdf
+2025-09-11 10:54:20,847 - INFO - Created example: examples/example_minimal.pdf
+2025-09-11 10:54:22,762 - INFO - Loaded 5 rows from participants.xlsx
+2025-09-11 10:54:22,762 - INFO - Processed 5 valid participants
+2025-09-11 10:54:22,763 - INFO - Generated certificate for Jane Doe
+2025-09-11 10:54:22,764 - INFO - Generated certificate for John Doe
+2025-09-11 10:54:22,764 - INFO - Generated certificate for Michael Williams
+2025-09-11 10:54:22,765 - INFO - Generated certificate for Sarah Brown
+2025-09-11 10:54:22,765 - INFO - Generated certificate for David Davis
+2025-09-11 10:54:22,765 - INFO - Generated 5/5 certificates
+2025-09-11 10:54:26,315 - INFO - Loaded 5 rows from participants.xlsx
+2025-09-11 10:54:26,316 - INFO - Processed 5 valid participants
+2025-09-11 10:54:26,317 - INFO - Generated certificate for Jane Doe
+2025-09-11 10:54:26,318 - INFO - Generated certificate for John Doe
+2025-09-11 10:54:26,318 - INFO - Generated certificate for Michael Williams
+2025-09-11 10:54:26,319 - INFO - Generated certificate for Sarah Brown
+2025-09-11 10:54:26,319 - INFO - Generated certificate for David Davis
+2025-09-11 10:54:26,319 - INFO - Generated 5/5 certificates
+2025-09-11 10:54:26,617 - INFO - Loaded 5 rows from participants.xlsx
+2025-09-11 10:54:26,617 - INFO - Processed 5 valid participants
+2025-09-11 10:54:26,618 - INFO - Generated certificate for Jane Doe
+2025-09-11 10:54:26,619 - INFO - Generated certificate for John Doe
+2025-09-11 10:54:26,619 - INFO - Generated certificate for Michael Williams
+2025-09-11 10:54:26,620 - INFO - Generated certificate for Sarah Brown
+2025-09-11 10:54:26,620 - INFO - Generated certificate for David Davis
+2025-09-11 10:54:26,620 - INFO - Generated 5/5 certificates
+2025-09-11 10:54:26,920 - INFO - Loaded 5 rows from participants.xlsx
+2025-09-11 10:54:26,920 - INFO - Processed 5 valid participants
+2025-09-11 10:54:26,921 - INFO - Generated certificate for Jane Doe
+2025-09-11 10:54:26,921 - INFO - Generated certificate for John Doe
+2025-09-11 10:54:26,922 - INFO - Generated certificate for Michael Williams
+2025-09-11 10:54:26,922 - INFO - Generated certificate for Sarah Brown
+2025-09-11 10:54:26,923 - INFO - Generated certificate for David Davis
+2025-09-11 10:54:26,923 - INFO - Generated 5/5 certificates
+2025-09-11 10:54:28,756 - INFO - Created example: examples/example_default.pdf
+2025-09-11 10:54:28,757 - INFO - Created example: examples/example_academic.pdf
+2025-09-11 10:54:28,757 - INFO - Created example: examples/example_modern.pdf
+2025-09-11 10:54:28,758 - INFO - Created example: examples/example_minimal.pdf
