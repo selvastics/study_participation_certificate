@@ -252,12 +252,16 @@ class CertificateSystem:
         # Position cursor inside the box - properly positioned
         pdf.set_xy(box_x + 10, box_y + 6)
         
+        # Study title - handle long text properly
+        study_text = f"Study: {self.config['certificate']['study_title']}"
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.multi_cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", align='L', border=0)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
@@ -268,24 +272,15 @@ class CertificateSystem:
         
         # Signature area - perfectly aligned on same page
         pdf.ln(8)
-        pdf.set_font("Arial", size=10)
-        
-        # Left signature area
-        pdf.set_x(25)
-        pdf.cell(70, 8, txt="Instructor Signature:", ln=False)
-        
-        # Right signature area
-        pdf.set_x(115)
-        pdf.cell(70, 8, txt="Date:", ln=True)
-        
-        # Signature lines - precisely positioned at same height
-        signature_y = pdf.get_y() + 3
-        pdf.line(25, signature_y, 95, signature_y)
-        pdf.line(115, signature_y, 185, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=30, y=pdf.get_y() + 5, w=50)
+            pdf.image(self.config["certificate"]["signature_path"], x=30, y=pdf.get_y(), w=50)
+        
+        # Date area
+        pdf.set_xy(115, pdf.get_y())
+        pdf.set_font("Arial", size=10)
+        pdf.cell(70, 8, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='C')
     
     def _create_academic_certificate(self, pdf, participant):
         """Academic-style certificate template with perfect alignment"""
@@ -361,6 +356,10 @@ class CertificateSystem:
         # Position cursor inside the box - properly positioned
         pdf.set_xy(box_x + 10, box_y + 6)
         
+        # Study title - handle long text properly
+        study_text = f"Study Title: {self.config['certificate']['study_title']}"
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        
         # Principal Investigator - handle long text properly
         pi_text = f"Principal Investigator: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=pi_text, align='L', border=0)
@@ -380,29 +379,15 @@ class CertificateSystem:
         
         # Signature area - perfectly aligned on same page
         pdf.ln(8)
-        pdf.set_font("Times", size=11)
-        
-        # Left signature area
-        pdf.set_x(35)
-        pdf.cell(55, 8, txt="Principal Investigator", ln=True, align='C')
-        pdf.set_x(35)
-        pdf.cell(55, 8, txt="Signature", ln=True, align='C')
-        
-        # Right signature area
-        pdf.set_x(115)
-        pdf.set_y(pdf.get_y() - 8)
-        pdf.cell(55, 8, txt="Date", ln=True, align='C')
-        pdf.set_x(115)
-        pdf.cell(55, 8, txt="Signature", ln=True, align='C')
-        
-        # Signature lines - precisely positioned at same height
-        signature_y = pdf.get_y() + 2
-        pdf.line(35, signature_y, 90, signature_y)
-        pdf.line(115, signature_y, 170, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=40, y=pdf.get_y() + 5, w=40)
+            pdf.image(self.config["certificate"]["signature_path"], x=40, y=pdf.get_y(), w=40)
+        
+        # Date area
+        pdf.set_xy(115, pdf.get_y())
+        pdf.set_font("Times", size=11)
+        pdf.cell(55, 8, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='C')
     
     def _create_modern_certificate(self, pdf, participant):
         """Modern design certificate template with perfect alignment"""
@@ -491,12 +476,16 @@ class CertificateSystem:
         line_height = 5
         text_width = card_w - 20  # Account for 10px padding on each side
         
+        # Study title - handle long text properly
+        study_text = f"Study: {self.config['certificate']['study_title']}"
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.multi_cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", align='L', border=0)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
@@ -507,26 +496,16 @@ class CertificateSystem:
         
         # Modern signature area - perfectly aligned on same page
         pdf.ln(8)
-        pdf.set_font("Arial", style='B', size=10)
-        pdf.set_text_color(70, 130, 180)
-        
-        # Left signature area
-        pdf.set_x(30)
-        pdf.cell(75, 8, txt="Instructor Signature", ln=False, align='C')
-        
-        # Right signature area
-        pdf.set_x(115)
-        pdf.cell(75, 8, txt="Date", ln=True, align='C')
-        
-        # Signature lines with modern style - precisely positioned at same height
-        pdf.set_draw_color(70, 130, 180)
-        signature_y = pdf.get_y() + 3
-        pdf.line(30, signature_y, 105, signature_y)
-        pdf.line(115, signature_y, 190, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y() + 5, w=45)
+            pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y(), w=45)
+        
+        # Date area
+        pdf.set_xy(115, pdf.get_y())
+        pdf.set_font("Arial", style='B', size=10)
+        pdf.set_text_color(70, 130, 180)
+        pdf.cell(75, 8, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='C')
     
     def _create_minimal_certificate(self, pdf, participant):
         """Minimal design certificate template with perfect alignment"""
@@ -587,36 +566,31 @@ class CertificateSystem:
         # Position cursor inside the box - properly positioned
         pdf.set_xy(info_x + 10, info_y + 6)
         
+        # Study title - handle long text properly
+        study_text = f"Study: {self.config['certificate']['study_title']}"
+        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.multi_cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", align='L', border=0)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
         
         # Simple signature area - perfectly aligned on same page
         pdf.ln(8)
-        pdf.set_font("Arial", size=10)
-        
-        # Left signature area
-        pdf.set_x(30)
-        pdf.cell(60, 8, txt="Signature:", ln=False, align='C')
-        
-        # Right signature area
-        pdf.set_x(110)
-        pdf.cell(60, 8, txt="Date:", ln=True, align='C')
-        
-        # Simple signature lines - precisely positioned at same height
-        signature_y = pdf.get_y() + 2
-        pdf.line(30, signature_y, 90, signature_y)
-        pdf.line(110, signature_y, 170, signature_y)
         
         # Add signature image if available
         if os.path.exists(self.config["certificate"]["signature_path"]):
-            pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y() + 3, w=40)
+            pdf.image(self.config["certificate"]["signature_path"], x=35, y=pdf.get_y(), w=40)
+        
+        # Date area
+        pdf.set_xy(110, pdf.get_y())
+        pdf.set_font("Arial", size=10)
+        pdf.cell(60, 8, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='C')
     
     def send_emails(self, template="default"):
         """Send certificates via email"""
