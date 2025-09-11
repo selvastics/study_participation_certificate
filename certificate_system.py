@@ -252,10 +252,6 @@ class CertificateSystem:
         # Position cursor inside the box - properly positioned
         pdf.set_xy(box_x + 10, box_y + 8)
         
-        # Study title - handle long text properly
-        study_text = f"Study Title: {self.config['certificate']['study_title']}"
-        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
-        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
@@ -360,14 +356,10 @@ class CertificateSystem:
         # Content inside box - precisely positioned within the box
         pdf.set_font("Times", size=10)
         line_height = 6
-        text_width = box_w - 100  # Account for 50px padding on each side
+        text_width = box_w - 20  # Account for 10px padding on each side
         
-        # Position cursor inside the box - moved WAY more to the right
-        pdf.set_xy(box_x + 50, box_y + 8)
-        
-        # Study title - handle long text properly
-        study_text = f"Study Title: {self.config['certificate']['study_title']}"
-        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        # Position cursor inside the box - properly positioned
+        pdf.set_xy(box_x + 10, box_y + 8)
         
         # Principal Investigator - handle long text properly
         pi_text = f"Principal Investigator: {self.config['certificate']['instructor_name']}"
@@ -490,18 +482,14 @@ class CertificateSystem:
         pdf.set_font("Arial", style='B', size=11)
         pdf.set_text_color(70, 130, 180)
         
-        # Position cursor inside the card for header - moved WAY more to the right
-        pdf.set_xy(card_x + 50, card_y + 10)
-        pdf.cell(card_w - 100, 8, txt="STUDY DETAILS", ln=True, align='C')
+        # Position cursor inside the card for header - properly positioned
+        pdf.set_xy(card_x + 10, card_y + 10)
+        pdf.cell(card_w - 20, 8, txt="STUDY DETAILS", ln=True, align='C')
         
         pdf.set_text_color(0, 0, 0)
         pdf.set_font("Arial", size=9)
         line_height = 6
-        text_width = card_w - 100  # Account for 50px padding on each side
-        
-        # Study title - handle long text properly
-        study_text = f"Study Title: {self.config['certificate']['study_title']}"
-        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        text_width = card_w - 20  # Account for 10px padding on each side
         
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
@@ -594,14 +582,10 @@ class CertificateSystem:
         # Content inside info box - precisely positioned within the box
         pdf.set_font("Arial", size=9)
         line_height = 6
-        text_width = info_w - 100  # Account for 50px padding on each side
+        text_width = info_w - 20  # Account for 10px padding on each side
         
-        # Position cursor inside the box - moved WAY more to the right
-        pdf.set_xy(info_x + 50, info_y + 8)
-        
-        # Study title - handle long text properly
-        study_text = f"Study: {self.config['certificate']['study_title']}"
-        pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
+        # Position cursor inside the box - properly positioned
+        pdf.set_xy(info_x + 10, info_y + 8)
         
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
