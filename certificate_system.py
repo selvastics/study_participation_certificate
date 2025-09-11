@@ -234,30 +234,30 @@ class CertificateSystem:
             pdf.cell(200, 8, txt=f'"{study_title}"', ln=True, align='C')
         
         # Details box - perfectly aligned with proper spacing
-        pdf.ln(15)
+        pdf.ln(10)
         box_x = 25
         box_y = pdf.get_y()
         box_w = 160
-        box_h = 45
+        box_h = 35
         
         # Draw box
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(box_x, box_y, box_w, box_h)
         
         # Content inside box - precisely positioned within the box
-        pdf.set_font("Arial", size=10)
-        line_height = 7
+        pdf.set_font("Arial", size=9)
+        line_height = 6
         text_width = box_w - 20  # Account for 10px padding on each side
         
         # Position cursor inside the box - properly positioned
-        pdf.set_xy(box_x + 10, box_y + 8)
+        pdf.set_xy(box_x + 10, box_y + 6)
         
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
@@ -266,8 +266,8 @@ class CertificateSystem:
         org_text = f"Organization: {self.config['certificate']['organization']}"
         pdf.multi_cell(text_width, line_height, txt=org_text, align='L', border=0)
         
-        # Signature area - perfectly aligned
-        pdf.ln(15)
+        # Signature area - perfectly aligned on same page
+        pdf.ln(8)
         pdf.set_font("Arial", size=10)
         
         # Left signature area
@@ -343,23 +343,23 @@ class CertificateSystem:
             pdf.cell(200, 10, txt=f'"{study_title}"', ln=True, align='C')
         
         # Details box - perfectly aligned with proper spacing
-        pdf.ln(20)
+        pdf.ln(12)
         box_x = 20
         box_y = pdf.get_y()
         box_w = 170
-        box_h = 50
+        box_h = 40
         
         # Draw box with border
         pdf.set_draw_color(0, 0, 0)
         pdf.rect(box_x, box_y, box_w, box_h)
         
         # Content inside box - precisely positioned within the box
-        pdf.set_font("Times", size=10)
-        line_height = 6
+        pdf.set_font("Times", size=9)
+        line_height = 5
         text_width = box_w - 20  # Account for 10px padding on each side
         
         # Position cursor inside the box - properly positioned
-        pdf.set_xy(box_x + 10, box_y + 8)
+        pdf.set_xy(box_x + 10, box_y + 6)
         
         # Principal Investigator - handle long text properly
         pi_text = f"Principal Investigator: {self.config['certificate']['instructor_name']}"
@@ -378,8 +378,8 @@ class CertificateSystem:
         # Participant ID
         pdf.multi_cell(text_width, line_height, txt=f"Participant ID: {participant['email']}", align='L', border=0)
         
-        # Signature area - perfectly aligned
-        pdf.ln(20)
+        # Signature area - perfectly aligned on same page
+        pdf.ln(8)
         pdf.set_font("Times", size=11)
         
         # Left signature area
@@ -467,11 +467,11 @@ class CertificateSystem:
         
         # Modern info card - perfectly aligned
         pdf.set_text_color(0, 0, 0)
-        pdf.ln(20)
+        pdf.ln(12)
         card_x = 25
         card_y = pdf.get_y()
         card_w = 160
-        card_h = 60
+        card_h = 45
         
         # Card background
         pdf.set_fill_color(255, 255, 255)
@@ -479,16 +479,16 @@ class CertificateSystem:
         pdf.rect(card_x, card_y, card_w, card_h, 'FD')
         
         # Card content - precisely positioned within the card
-        pdf.set_font("Arial", style='B', size=11)
+        pdf.set_font("Arial", style='B', size=10)
         pdf.set_text_color(70, 130, 180)
         
         # Position cursor inside the card for header - properly positioned
-        pdf.set_xy(card_x + 10, card_y + 10)
-        pdf.cell(card_w - 20, 8, txt="STUDY DETAILS", ln=True, align='C')
+        pdf.set_xy(card_x + 10, card_y + 8)
+        pdf.cell(card_w - 20, 6, txt="STUDY DETAILS", ln=True, align='C')
         
         pdf.set_text_color(0, 0, 0)
-        pdf.set_font("Arial", size=9)
-        line_height = 6
+        pdf.set_font("Arial", size=8)
+        line_height = 5
         text_width = card_w - 20  # Account for 10px padding on each side
         
         # Instructor - handle long text properly
@@ -496,7 +496,7 @@ class CertificateSystem:
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
         # Hours
-        pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
+        pdf.multi_cell(text_width, line_height, txt=f"Hours: {self.config['certificate']['hours']}", align='L', border=0)
         
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
@@ -505,8 +505,8 @@ class CertificateSystem:
         inst_text = f"Institution: {self.config['certificate']['organization']}"
         pdf.multi_cell(text_width, line_height, txt=inst_text, align='L', border=0)
         
-        # Modern signature area - perfectly aligned
-        pdf.ln(20)
+        # Modern signature area - perfectly aligned on same page
+        pdf.ln(8)
         pdf.set_font("Arial", style='B', size=10)
         pdf.set_text_color(70, 130, 180)
         
@@ -569,23 +569,23 @@ class CertificateSystem:
             pdf.cell(200, 8, txt=f'"{study_title}"', ln=True, align='C')
         
         # Minimal info section - perfectly aligned
-        pdf.ln(25)
+        pdf.ln(15)
         info_x = 35
         info_y = pdf.get_y()
         info_w = 140
-        info_h = 35
+        info_h = 30
         
         # Draw subtle border
         pdf.set_draw_color(200, 200, 200)
         pdf.rect(info_x, info_y, info_w, info_h)
         
         # Content inside info box - precisely positioned within the box
-        pdf.set_font("Arial", size=9)
-        line_height = 6
+        pdf.set_font("Arial", size=8)
+        line_height = 5
         text_width = info_w - 20  # Account for 10px padding on each side
         
         # Position cursor inside the box - properly positioned
-        pdf.set_xy(info_x + 10, info_y + 8)
+        pdf.set_xy(info_x + 10, info_y + 6)
         
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
@@ -597,8 +597,8 @@ class CertificateSystem:
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
         
-        # Simple signature area - perfectly aligned
-        pdf.ln(20)
+        # Simple signature area - perfectly aligned on same page
+        pdf.ln(8)
         pdf.set_font("Arial", size=10)
         
         # Left signature area
