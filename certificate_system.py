@@ -256,15 +256,27 @@ class CertificateSystem:
         study_text = f"Study: {self.config['certificate']['study_title']}"
         pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
+        # Reset X position for all subsequent lines to align perfectly
+        pdf.set_x(box_x + 10)
+        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(box_x + 10)
+        
         # Hours
         pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(box_x + 10)
+        
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
+        
+        # Reset X position
+        pdf.set_x(box_x + 10)
         
         # Organization - handle long text properly
         org_text = f"Organization: {self.config['certificate']['organization']}"
@@ -360,19 +372,34 @@ class CertificateSystem:
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
         pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
+        # Reset X position for all subsequent lines to align perfectly
+        pdf.set_x(box_x + 10)
+        
         # Principal Investigator - handle long text properly
         pi_text = f"Principal Investigator: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=pi_text, align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(box_x + 10)
+        
         # Hours
         pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
+        
+        # Reset X position
+        pdf.set_x(box_x + 10)
         
         # Institution - handle long text properly
         inst_text = f"Institution: {self.config['certificate']['organization']}"
         pdf.multi_cell(text_width, line_height, txt=inst_text, align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(box_x + 10)
+        
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date of Completion: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
+        
+        # Reset X position
+        pdf.set_x(box_x + 10)
         
         # Participant ID
         pdf.multi_cell(text_width, line_height, txt=f"Participant ID: {participant['email']}", align='L', border=0)
@@ -480,15 +507,27 @@ class CertificateSystem:
         study_text = f"Study: {self.config['certificate']['study_title']}"
         pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
+        # Reset X position for all subsequent lines to align perfectly
+        pdf.set_x(card_x + 10)
+        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(card_x + 10)
+        
         # Hours
         pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(card_x + 10)
+        
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
+        
+        # Reset X position
+        pdf.set_x(card_x + 10)
         
         # Institution - handle long text properly
         inst_text = f"Institution: {self.config['certificate']['organization']}"
@@ -570,12 +609,21 @@ class CertificateSystem:
         study_text = f"Study: {self.config['certificate']['study_title']}"
         pdf.multi_cell(text_width, line_height, txt=study_text, align='L', border=0)
         
+        # Reset X position for all subsequent lines to align perfectly
+        pdf.set_x(info_x + 10)
+        
         # Instructor - handle long text properly
         instructor_text = f"Instructor: {self.config['certificate']['instructor_name']}"
         pdf.multi_cell(text_width, line_height, txt=instructor_text, align='L', border=0)
         
+        # Reset X position
+        pdf.set_x(info_x + 10)
+        
         # Hours
         pdf.multi_cell(text_width, line_height, txt=f"Hours Completed: {self.config['certificate']['hours']}", align='L', border=0)
+        
+        # Reset X position
+        pdf.set_x(info_x + 10)
         
         # Date
         pdf.multi_cell(text_width, line_height, txt=f"Date: {datetime.now().strftime('%B %d, %Y')}", align='L', border=0)
