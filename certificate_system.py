@@ -247,10 +247,10 @@ class CertificateSystem:
         # Content inside box - precisely positioned within the box
         pdf.set_font("Arial", size=10)
         line_height = 7
-        text_width = box_w - 100  # Account for 50px padding on each side
+        text_width = box_w - 20  # Account for 10px padding on each side
         
-        # Position cursor inside the box - moved WAY more to the right
-        pdf.set_xy(box_x + 50, box_y + 8)
+        # Position cursor inside the box - properly positioned
+        pdf.set_xy(box_x + 10, box_y + 8)
         
         # Study title - handle long text properly
         study_text = f"Study Title: {self.config['certificate']['study_title']}"
