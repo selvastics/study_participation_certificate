@@ -1,5 +1,7 @@
 # Certificate System
 
+If you are a researcher doing surveys where your participants need compensations, like a certificate or so for study requirements (in Germany we name it "Versuchspersonen stunden"). For such cases, this can be a bit tricky - you have to separate the data from the sensitive information. With the proposed solution, you can create the PDF individualized for the data entry.
+
 Generate and send PDF certificates from Excel data.
 
 ## Quick Start
